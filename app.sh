@@ -32,10 +32,10 @@ display_header() {
 
 # Fungsi untuk menampilkan daftar item dengan format tabel
 display_items() {
-    echo -e "${BOLD}No. Nama Item         Harga      Stock${NC}"
+    echo -e "${BOLD}No. Nama Item         Harga      Stok${NC}"
     for i in "${!items[@]}"; do
-        printf "${GREEN}%2d. ${CYAN}%-15s ${YELLOW}Rp%-5d ${BLUE}(Stock: %d)${NC}\n" \
-            $((i+1)) "${items[i]}" "${harga[i]}" "${stock[i]}"
+        printf "${GREEN}%2d. ${CYAN}%-15s ${YELLOW}Rp%-5d ${BLUE}(Stok: %d)${NC}\n" \
+            $((i+1)) "${items[i]}" "${harga[i]}" "${stok[i]}"
     done
 }
 
@@ -83,7 +83,7 @@ process_payment() {
         if validate_input "$payment" 1; then
             if (( payment >= total )); then
                 local change=$((payment - total))
-                stock[index]=$((stock[index] - qty))
+                stok[index]=$((stok[index] - qty))
                 
                 echo -e "\n${GREEN}----------------------${NC}"
                 echo -e "-- Transaksi Berhasil!  --"
@@ -125,11 +125,11 @@ menu_pembelian() {
         [ $choice -eq 7 ] && return
         
         local index=$((choice-1))
-        if [ ${stock[index]} -gt 0 ]; then
+        if [ ${stok[index]} -gt 0 ]; then
             # Input jumlah pembelian
             while true; do
-                read -p "Masukkan jumlah (Stock: ${stock[index]}): " qty
-                if validate_input "$qty" 1 ${stock[index]}; then break; fi
+                read -p "Masukkan jumlah (Stok: ${stok[index]}): " qty
+                if validate_input "$qty" 1 ${stok[index]}; then break; fi
             done
 
             # Konfirmasi pembelian
@@ -139,7 +139,7 @@ menu_pembelian() {
                 *) echo -e "${YELLOW}Transaksi dibatalkan!${NC}" ;;
             esac
         else
-            echo -e "${RED}Stock habis!${NC}"
+            echo -e "${RED}Stok habis!${NC}"
             read -p "Tekan enter untuk melanjutkan..."
         fi
     done
@@ -178,7 +178,7 @@ menu_restok() {
             if validate_input "$add_stok" 1; then break; fi
         done
 
-        stock[index]=$((stok[index] + add_stok))
+        stok[index]=$((stok[index] + add_stok))
         echo -e "${GREEN}Stok berhasil ditambahkan!${NC}"
         read -p "Tekan enter untuk melanjutkan..."
     done
@@ -198,10 +198,11 @@ while true; do
     echo -e "${BOLD}===============================${NC}"
     
     while true; do
-        read -p "Pilih menu [1-4]: " menu
+        read -p "Pilih menu [1-4]: " menu 
+        echo -e "${BOLD}===============================${NC}"
         if validate_input "$menu" 1 4; then break; fi
     done
-    echo -e "${BOLD}===============================${NC}"
+   
     case $menu in
         1) menu_pembelian ;;
         2) 
@@ -210,7 +211,7 @@ while true; do
             display_items
             read -p "Tekan enter untuk kembali..."
             ;;
-        3) menu_restock ;;
+        3) menu_restok ;;
         4) 
             echo -e "\n${GREEN}Terima kasih telah menggunakan layanan kami!${NC}"
             exit 0
