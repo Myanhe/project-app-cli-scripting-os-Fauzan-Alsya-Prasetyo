@@ -102,7 +102,7 @@ process_payment() {
             fi
         fi
     done
-    read -p "${BOLD}Tekan enter untuk melanjutkan...${NC}"
+    read -p " Tekan enter untuk melanjutkan... "
 }
 
 # ==================================================
