@@ -109,11 +109,11 @@ process_payment() {
 # MENU UTAMA
 # ==================================================
 
-# Fungsi menu pembelian
-menu_pembelian() {
+# Fungsi MENU MINUMAN
+menu_minuman() {
     while true; do
         display_header
-        echo -e "${BOLD}=== MENU PEMBELIAN ===${NC}"
+        echo -e "${BOLD}=== MENU MINUMAN ===${NC}"
         display_items
         echo -e "\n${YELLOW}7. Kembali ke Menu Utama${NC}"
         
@@ -191,20 +191,19 @@ while true; do
     display_header
     
     echo -e "${BOLD}Pilihan Menu:${NC}"
-    echo -e "${CYAN}1. Menu Pembelian"
+    echo -e "${CYAN}1. MENU MINUMAN"
     echo -e "2. Cek Stok"
     echo -e "3. Restok (Admin)"
     echo -e "4. Keluar${NC}"
     echo -e "${BOLD}===============================${NC}"
     
     while true; do
-        read -p "Pilih menu [1-4]: " menu 
-        echo -e "${BOLD}===============================${NC}"
+        read -p "Pilih menu [1-4]: " menu echo -e "${BOLD}===============================${NC}"
         if validate_input "$menu" 1 4; then break; fi
     done
    
     case $menu in
-        1) menu_pembelian ;;
+        1) menu_minuman ;;
         2) 
             display_header
             echo -e "${BOLD}=== CEK STOK ===${NC}"
