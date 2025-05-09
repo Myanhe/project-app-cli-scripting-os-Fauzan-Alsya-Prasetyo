@@ -12,23 +12,20 @@ NC='\033[0m' # No Color
 BOLD='\033[1m'
 
 # ==================================================
-# DEKLARASI VARIABEL GLOBAL
+# DEKLARASI VARIABEL
 # ==================================================
 declare -a stok=(90 78 75 45 52 77)
 declare -a harga=(5000 10000 5000 5000 10000 10000)
 declare -a items=("Soda" "Coklat" "Air Mineral" "Teh" "Matcha" "Kopi")
 password="hey123"
 
-# ==================================================
-# FUNGSI UTAMA
-# ==================================================
 
 # Fungsi untuk menampilkan header dengan animasi
 display_header() {
     clear
     echo -e "${CYAN}"
     echo "=============================="
-    echo "   ${BOLD} Mesin Minuman ${NC}${CYAN}   "
+    echo -e "   ${BOLD} Mesin Minuman ${NC}${CYAN}   "
     echo "=============================="
     echo -e "${NC}"
 }
@@ -43,10 +40,6 @@ display_items() {
 }
 
 # Fungsi validasi input numerik dengan range
-# Parameter:
-# $1 = input
-# $2 = nilai minimal (opsional)
-# $3 = nilai maksimal (opsional)
 validate_input() {
     local input=$1
     local min=$2
@@ -73,9 +66,6 @@ validate_input() {
 }
 
 # Fungsi proses pembayaran dengan animasi
-# Parameter:
-# $1 = index item
-# $2 = jumlah pembelian
 process_payment() {
     local index=$1
     local qty=$2
@@ -194,11 +184,12 @@ menu_restok() {
     done
 }
 
-# ==================================================
+
 # Menu UTAMA
-# ==================================================
+
 while true; do
     display_header
+    
     echo -e "${BOLD}Pilihan Menu:${NC}"
     echo -e "${CYAN}1. Menu Pembelian"
     echo -e "2. Cek Stok"
@@ -210,12 +201,12 @@ while true; do
         read -p "Pilih menu [1-4]: " menu
         if validate_input "$menu" 1 4; then break; fi
     done
-
+    echo -e "${BOLD}===============================${NC}"
     case $menu in
         1) menu_pembelian ;;
         2) 
             display_header
-            echo -e "${BOLD}=== CEK STOCK ===${NC}"
+            echo -e "${BOLD}=== CEK STOK ===${NC}"
             display_items
             read -p "Tekan enter untuk kembali..."
             ;;
