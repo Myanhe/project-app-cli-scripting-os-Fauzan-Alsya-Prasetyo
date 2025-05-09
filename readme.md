@@ -1,1 +1,1 @@
-https://drive.google.com/drive/folders/1JqFbCxZmtXWcnUS5A_yXv81m4Rl6ef8N?usp=drive_link
+Link video dari aplikasi yang dipresentasikan : https://drive.google.com/drive/folders/1JqFbCxZmtXWcnUS5A_yXv81m4Rl6ef8N?usp=drive_link
